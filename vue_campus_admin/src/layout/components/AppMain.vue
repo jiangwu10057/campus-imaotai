@@ -1,5 +1,5 @@
 <template>
-  <section class="app-main" id="app-main">
+  <section id="app-main" class="app-main">
     <transition name="fade-transform" mode="out-in">
       <keep-alive :include="cachedViews">
         <router-view v-if="!$route.meta.link" :key="key" />
@@ -11,39 +11,33 @@
 </template>
 
 <script>
-import iframeToggle from "./IframeToggle/index";
-import watermark from "watermark-dom";
+import iframeToggle from './IframeToggle/index'
+// import watermark from 'watermark-dom'
 
 export default {
-  name: "AppMain",
+  name: 'AppMain',
+  components: { iframeToggle },
   data() {
     return {
-      ttt: "",
-    };
+      ttt: ''
+    }
   },
-  components: { iframeToggle },
   computed: {
     cachedViews() {
-      return this.$store.state.tagsView.cachedViews;
+      return this.$store.state.tagsView.cachedViews
     },
     key() {
-      return this.$route.path;
-    },
-  },
-  mounted() {
-    const ttt = this.Crypto.get(
-          "Wuv7//QyvM5eAH6r6Yo3ng=="
-        );
-    watermark.load({ watermark_txt: ttt });
+      return this.$route.path
+    }
   },
   watch: {
     $route(route) {
-        this.ttt = this.Crypto.get(
-          "JcPYFM5UAxqqLazbPKP8clN2geEWtOa/7P4nS4iJFvMeTCDKC0KgsFRoyO/kvjgmgzNB+L4ASDp26yz7hbhDxUpvtnLYSUgDUtII9L1Rxtk="
-        );
-    },
+    }
   },
-};
+  mounted() {
+    // watermark.load({ watermark_txt: this.ttt })
+  }
+}
 </script>
 
 <style lang="scss" scoped>
